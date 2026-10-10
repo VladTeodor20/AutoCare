@@ -1,0 +1,106 @@
+	
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="AutoCare - car maintenance task manager">
+    <title>AutoCare - Car Maintenance Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <p class="eyebrow">YOUR CAR, WELL CARED FOR</p>
+        <h1>AutoCare</h1>
+        <p class="header-description">
+            Keep track of your car maintenance and repairs.
+        </p>
+        <p class="app-count">3 maintenance tasks · 2 active</p>
+    </header>
+
+    <main class="container">
+        <section class="panel">
+            <p class="section-label">MAINTENANCE</p>
+            <h2>Add a task</h2>
+            <p class="panel-description">
+                Organize your next car maintenance operation.
+            </p>
+
+            <form class="item-form">
+                <label for="task-name">Task name</label>
+                <input type="text" id="task-name" name="name"
+                       placeholder="e.g. Oil change" maxlength="100" required>
+
+                <label for="task-priority">Priority</label>
+                <select id="task-priority" name="priority">
+                    <option value="urgent">Urgent</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <button type="button">Add task</button>
+            </form>
+
+            <p class="form-note">
+                Task creation will be enabled in a later stage.
+            </p>
+        </section>
+
+        <section class="panel">
+            <div class="list-heading">
+                <div>
+                    <p class="section-label">YOUR GARAGE</p>
+                    <h2>Maintenance tasks</h2>
+                </div>
+                <span class="total-badge">03 tasks</span>
+            </div>
+
+            <ul class="item-list">
+                <li class="item-card">
+                    <div class="item-main">
+                        <span class="item-icon" aria-hidden="true">⚙</span>
+                        <div class="item-details">
+                            <h3>Oil change</h3>
+                            <p>Engine · Regular maintenance</p>
+                            <span class="badge badge-urgent">Urgent</span>
+                        </div>
+                    </div>
+                    <span class="status status-active">Active</span>
+                </li>
+
+                <li class="item-card done">
+                    <div class="item-main">
+                        <span class="item-icon" aria-hidden="true">✓</span>
+                        <div class="item-details">
+                            <h3>Brake inspection</h3>
+                            <p>Brakes · Safety check</p>
+                            <span class="badge badge-normal">Normal</span>
+                        </div>
+                    </div>
+                    <span class="status status-done">Completed</span>
+                </li>
+
+                <li class="item-card">
+                    <div class="item-main">
+                        <span class="item-icon" aria-hidden="true">◉</span>
+                        <div class="item-details">
+                            <h3>Tire replacement</h3>
+                            <p>Tires · Seasonal maintenance</p>
+                            <span class="badge badge-low">Low</span>
+                        </div>
+                    </div>
+                    <span class="status status-active">Active</span>
+                </li>
+            </ul>
+
+            <p class="list-footer">
+                Small steps today. A safer drive tomorrow.
+            </p>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>AutoCare · Web Technologies Project · 2026</p>
+    </footer>
+</body>
+</html>
