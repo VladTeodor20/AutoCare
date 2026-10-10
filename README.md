@@ -36,6 +36,8 @@ The sample tasks are static examples used to demonstrate the interface.
 
 * HTML5 for the page structure and semantic elements.
 * CSS3 for layout, colors, responsive design, and dark theme.
+* JavaScript for data management, validation, and testing in the browser console.
+
 
 ## How to run
 
@@ -43,6 +45,9 @@ The sample tasks are static examples used to demonstrate the interface.
 2. Open `index.html` in a web browser.
 3. Resize the browser window to check the responsive layout.
 4. Use the `Tab` key to check keyboard focus visibility.
+5. Press `F12` and open the `Console` tab to view the JavaScript test results.
+6. Refresh the browser page to run the JavaScript tests again.
+
 
 No server or additional software is required for this static mockup.
 
@@ -53,3 +58,27 @@ ChatGPT was used to help choose and describe the AutoCare project topic, plan th
 ## Stage 1 verification
 
 The GitHub permalinks and verification instructions for the Stage 1 requirements will be added after the code has been published to the repository.
+
+
+## Stage 2: Data Logic (JavaScript)
+
+AutoCare uses JavaScript to manage car maintenance tasks.
+
+The `autocare.js` file contains:
+- An array with three maintenance tasks.
+- Functions to list and search tasks.
+- A function to count active tasks.
+- A function to add new tasks with validation.
+- A function to change task completion status.
+- A function to delete tasks.
+
+The functions do not modify the original array.
+
+All JavaScript tests are displayed in the browser console (F12).
+
+## Status
+
+- [x] Stage 1: HTML and CSS mockup
+- [x] Stage 2: JavaScript data logic
+- [ ] Stage 3: React and Vite
+
