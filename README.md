@@ -82,3 +82,15 @@ All JavaScript tests are displayed in the browser console (F12).
 - [x] Stage 2: JavaScript data logic
 - [ ] Stage 3: React and Vite
 
+
+## Stage 2 verification
+
+| ID | Requirement | Where (permalink) | How to check |
+|---|---|---|---|
+| S2-R1 | JavaScript linked to HTML |[View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/index.html#L108)| Open page and press F12 |
+| S2-R2 | Three tasks with required fields |[View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/autocare.js#L2-L30)| Read autocare.js |
+| S2-R3 | List, count, search, add, toggle, delete | [View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/autocare.js#L35-L134) | Check console output |
+| S2-R4 | Validation of name and priority | [View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/autocare.js#L78-L93) | Check validation messages |
+| S2-R5 | Original array remains unchanged | [View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/autocare.js#L153-L155) | Check console output |
+| S2-R6 | README and AI log | [README](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/README.md) / [AI log](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/ai-log/etapa-02.md) | Read files |
+| S2-R7 | Stage 2 commit published | [View commit](https://github.com/VladTeodor20/AutoCare/commit/bdf2df8) | Check Git history |
