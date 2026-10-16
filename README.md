@@ -94,3 +94,34 @@ All JavaScript tests are displayed in the browser console (F12).
 | S2-R5 | Original array remains unchanged | [View code](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/autocare.js#L153-L155) | Check console output |
 | S2-R6 | README and AI log | [README](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/README.md) / [AI log](https://github.com/VladTeodor20/AutoCare/blob/944f34c80fcaafe15be77bf9f4c60b2b1d8a2a4e/ai-log/etapa-02.md) | Read files |
 | S2-R7 | Stage 2 commit published | [View commit](https://github.com/VladTeodor20/AutoCare/commit/bdf2df8) | Check Git history |
+## Stage 3: Vite and React project
+
+The AutoCare application now lives in `frontend/` and is built with Vite and React.
+
+The maintenance tasks from Stage 2 have been moved into the main React component (`App.jsx`).
+
+The application displays 3 maintenance tasks, including 2 active tasks. The counter is calculated dynamically from the data.
+
+The original styles from Stage 1 have been reused in `App.css`.
+
+The maintenance tasks are temporarily displayed as JSON. React components for displaying individual tasks will be implemented in Stage 4.
+
+## How to run
+
+1. Open the project in Visual Studio Code.
+2. Open a terminal.
+3. Run the following commands:
+
+    cd frontend
+    npm install
+    npm run dev
+
+4. Open http://localhost:5173/ in your browser.
+
+## Build verification
+
+The application was successfully built using:
+
+    npm run build
+
+The build completed without errors.
