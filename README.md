@@ -78,9 +78,13 @@ All JavaScript tests are displayed in the browser console (F12).
 
 ## Status
 
+
 - [x] Stage 1: HTML and CSS mockup
 - [x] Stage 2: JavaScript data logic
-- [ ] Stage 3: React and Vite
+- [x] Stage 3: Vite and React project
+- [x] Stage 4: components rendered from data
+- [ ] Stage 5: local state and events
+
 
 
 ## Stage 2 verification
@@ -104,7 +108,9 @@ The application displays 3 maintenance tasks, including 2 active tasks. The coun
 
 The original styles from Stage 1 have been reused in `App.css`.
 
-The maintenance tasks are temporarily displayed as JSON. React components for displaying individual tasks will be implemented in Stage 4.
+
+At the end of Stage 3, the maintenance tasks were temporarily displayed as JSON. In Stage 4, this was replaced with reusable React components that render the tasks as cards.
+ React components for displaying individual tasks will be implemented in Stage 4.
 
 ## How to run
 
@@ -125,3 +131,19 @@ The application was successfully built using:
     npm run build
 
 The build completed without errors.
+
+
+## Stage 4: components
+
+The maintenance tasks are now rendered from data using two reusable React components:
+
+- `MaintenanceList` receives the entire maintenanceTasks array through props and generates a card for each task using map() and a unique key.
+- `MaintenanceCard` receives a single task through props and displays its name, category, description, owner, priority, and completion status.
+
+The application displays an explicit message when the list is empty.
+
+Completed tasks have a different visual appearance from active tasks.
+
+The components are stored in `frontend/src/components/`.
+
+The application was tested with an empty list and by changing the completion status of a task. No React warnings were observed in the browser console.

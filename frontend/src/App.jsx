@@ -1,3 +1,6 @@
+
+import MaintenanceList from "./components/MaintenanceList.jsx";
+
 const maintenanceTasks = [
     {
         id: 1,
@@ -28,6 +31,9 @@ const maintenanceTasks = [
     }
 ];  
 
+
+
+
 export default function App() {
   const active = maintenanceTasks.filter((task) => !task.completed).length;
   return (
@@ -49,8 +55,9 @@ export default function App() {
   <section className="panel">
     <h2>Maintenance tasks</h2>
 
-    {/* Temporary: raw data displayed as JSON */}
-    <pre>{JSON.stringify(maintenanceTasks, null, 2)}</pre>
+   
+<MaintenanceList maintenanceTasks={maintenanceTasks} />
+
   </section>
 </main>
   </>
