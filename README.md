@@ -147,3 +147,15 @@ Completed tasks have a different visual appearance from active tasks.
 The components are stored in `frontend/src/components/`.
 
 The application was tested with an empty list and by changing the completion status of a task. No React warnings were observed in the browser console.
+
+## Stage 4 verification
+
+| ID | Requirement | Where (permalink) | How to check |
+|---|---|---|---|
+| S4-R1 | Two React components | [Components folder](https://github.com/VladTeodor20/AutoCare/tree/835a4ab7e54eacff647040b2c24c003cf208e38f/frontend/src/components) | Open folder |
+| S4-R2 | Card receives data through props | [MaintenanceCard.jsx](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/frontend/src/components/MaintenanceCard.jsx#L7-L29) | Read component |
+| S4-R3 | map and unique key, no React warnings | [MaintenanceList.jsx](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/frontend/src/components/MaintenanceList.jsx#L8-L17) | Inspect code and browser console |
+| S4-R4 | Empty list message | [MaintenanceList.jsx](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/frontend/src/components/MaintenanceList.jsx#L3-L6) | Set array to empty |
+| S4-R5 | Completion status changes card appearance | [MaintenanceCard.jsx](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/frontend/src/components/MaintenanceCard.jsx#L7-L29) | Change completed flag |
+| S4-R6 | README and AI log completed | [README](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/README.md#L136-L149) / [AI Log](https://github.com/VladTeodor20/AutoCare/blob/835a4ab7e54eacff647040b2c24c003cf208e38f/ai-log/etapa-04.md) | Read files |
+| S4-R7 | Stage 4 commit pushed to GitHub | [View commit](https://github.com/VladTeodor20/AutoCare/commit/835a4ab7e54eacff647040b2c24c003cf208e38f) | Check commit history |
