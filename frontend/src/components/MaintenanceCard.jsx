@@ -1,30 +1,28 @@
+const ETICHETE_PRIORITATE = { mica: "mică", medie: "medie", mare: "mare" };
 
-const PRIORITY_LABELS = {
-  urgent: "Urgent",
-  normal: "Normal",
-  low: "Low",
-};
-
-export default function MaintenanceCard({ task }) {
+export default function MaintenanceCard({ mentenanta, onToggle, onDelete }) {
   return (
-    <li className={task.completed ? "item-card done" : "item-card"}>
-      <div className="item-main">
-        <div className="item-details">
-          <h3>{task.name}</h3>
-
-          <p>{task.category} · {task.description}</p>
-
-          <p>Responsible: {task.owner}</p>
-
-          <span className={`badge badge-${task.priority}`}>
-            Priority: {PRIORITY_LABELS[task.priority]}
+    <li className={mentenanta.efectuata ? "task-card done" : "task-card"}>
+      <label className="task-main">
+        <input
+          type="checkbox"
+          checked={mentenanta.efectuata}
+          onChange={() => onToggle(mentenanta.id)}
+        />
+        <div>
+          <h3>{mentenanta.titlu}</h3>
+          <span className={`badge badge-${mentenanta.prioritate}`}>
+            Prioritate {ETICHETE_PRIORITATE[mentenanta.prioritate]}
           </span>
         </div>
-      </div>
-
-      <span className={task.completed ? "status status-done" : "status status-active"}>
-        {task.completed ? "Completed" : "Active"}
-      </span>
+      </label>
+      <button
+        className="btn-danger"
+        onClick={() => onDelete(mentenanta.id)}
+        aria-label={`Șterge ${mentenanta.titlu}`}
+      >
+        Șterge
+      </button>
     </li>
   );
 }

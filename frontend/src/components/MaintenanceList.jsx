@@ -1,17 +1,20 @@
-
 import MaintenanceCard from "./MaintenanceCard.jsx";
 
-export default function MaintenanceList({ maintenanceTasks }) {
-  if (maintenanceTasks.length === 0) {
-    return <p className="empty">No maintenance tasks.</p>;
+export default function MaintenanceList({ mentenante, onToggle, onDelete }) {
+  if (mentenante.length === 0) {
+    return <p className="empty">Nu există nicio intervenție înregistrată.</p>;
   }
 
   return (
-    <ul className="item-list">
-      {maintenanceTasks.map((task) => (
-        <MaintenanceCard key={task.id} task={task} />
+    <ul className="task-list">
+      {mentenante.map((mentenanta) => (
+        <MaintenanceCard
+          key={mentenanta.id}
+          mentenanta={mentenanta}
+          onToggle={onToggle}
+          onDelete={onDelete}
+        />
       ))}
     </ul>
   );
 }
-
