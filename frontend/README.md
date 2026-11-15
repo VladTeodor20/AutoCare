@@ -1,39 +1,70 @@
-# React + Vite
+# AutoCare — jurnal de mentenanță auto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicație React pentru afișarea și urmărirea intervențiilor de mentenanță auto.
+Interfața principală este în `frontend/`, iar prototipul static din etapele
+anterioare este păstrat în `mockup/`.
 
-Currently, two official plugins are available:
+## Conținutul proiectului
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `src/App.jsx` încarcă intervențiile, calculează contorul și gestionează
+  tema, bifarea și ștergerea locală.
+- `src/components/` conține componentele reutilizabile pentru lista de
+  intervenții și cardul fiecărei intervenții.
+- `src/api.js` centralizează cererea HTTP și adresa API-ului.
+- `db.json` conține cinci intervenții de test, cu categorii și stări diferite.
+- `src/App.css` definește aspectul adaptabil și temele vizuale.
 
-## React Compiler
+## Rulare locală
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Pornește comenzile în două terminale, ambele din directorul `frontend/`.
 
-## Expanding the ESLint configuration
+Terminalul 1 — API-ul mock:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm run api
+```
 
+API-ul expune lista la <http://localhost:3001/maintenanceTasks>.
 
-## Stage 5: local state and events
-The list lives in React state. Checking and deleting work from the page,
-and the counters in the header follow automatically. A button in the
-header switches between light and dark mode. Changes are lost on refresh,
-which is what stage 6 and stage 10 fix.
+Terminalul 2 — aplicația React:
 
-## Status
-- [x] Stage 4: components rendered from data
-- [x] Stage 5: local state and events
-- [ ] Stage 6: loading data from a mock API
+```sh
+npm run dev
+```
 
-| ID | Requirement | Where (permalink) | How to check |
-|---|---|---|---|
-| S5-R1 | list kept in useState, in App | App.jsx#L.. | read |
-| S5-R2 | toggling changes state and card look | App.jsx#L..-L..<br>MaintenanceCard.jsx#L.. | click a checkbox |
-| S5-R3 | delete removes the item | App.jsx#L..-L..<br>MaintenanceCard.jsx#L.. | click Delete |
-| S5-R4 | header counter derived, not in state | App.jsx#L.. | toggle, watch header |
-| S5-R5 | immutable updates (no push, splice, assignment) | App.jsx#L..-L.. | read |
-| S5-R6 | light/dark toggle: state + data-theme on html | App.jsx#L..-L..<br>App.css#L..-L.. | click the button, both system themes |
-| S5-R7 | no console warnings; README + AI log | README.md, ai-log/etapa-05.md | F12, Console |
-| S5-R8 | commit "Stage 5" pushed | link to the commit | commit history |
+Deschide adresa Vite afișată în terminal (implicit
+<http://localhost:5173>). Adresa API poate fi schimbată prin `VITE_API_URL`;
+valoarea implicită este `http://localhost:3001`.
+
+## Stadiul proiectului
+
+- [x] Etapa 5: stare locală și evenimente
+- [x] Etapa 6: încărcarea datelor dintr-un API mock
+- [ ] Etapa 7: formular și validare
+
+## Etapa 6: date de la un API mock
+
+La deschiderea paginii, aplicația cere datele din `db.json` prin `json-server`.
+Interfața afișează starea de încărcare, lista după răspunsul reușit sau un
+mesaj de eroare cu instrucțiunea de pornire a API-ului. Cererile HTTP sunt
+centralizate în `src/api.js`, iar efectul React este curățat la demontarea
+componentei.
+
+Bifarea și ștergerea modifică momentan doar starea locală și se pierd la
+reîncărcarea paginii; salvarea modificărilor pe server ține de etapa următoare.
+
+| ID | Cerință | Verificare |
+|---|---|---|
+| S6-R1 | `npm run api` pornește API-ul cu datele din `db.json` | Deschide `http://localhost:3001/maintenanceTasks` |
+| S6-R2 | Datele sunt încărcate de la API, nu hardcodate în `App.jsx` | Oprește și repornește API-ul |
+| S6-R3 | Este afișat mesajul de încărcare | Pornește temporar API-ul cu `npx json-server --watch db.json --port 3001 --delay 4000` |
+| S6-R4 | O eroare API este explicată utilizatorului | Oprește API-ul și reîncarcă pagina |
+| S6-R5 | `fetch` este centralizat, iar URL-ul poate fi configurat | Verifică `src/api.js` și `.env.example` |
+| S6-R6 | Etapa este documentată | Consultă `ai-log/etapa-06.md` |
+
+Verificări de proiect:
+
+```sh
+npm run lint
+npm run build
+```

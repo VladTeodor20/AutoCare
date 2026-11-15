@@ -483,3 +483,19 @@ button, input, select {
   text-decoration: line-through;
   color: var(--muted);
 }
+.info {
+  color: var(--muted);
+}
+
+.error {
+  color: var(--urgent-text);
+  background: var(--urgent-bg);
+  border: 1px solid var(--urgent-text);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.badge-category {
+  background: var(--accent-soft);
+  color: var(--accent);
+}

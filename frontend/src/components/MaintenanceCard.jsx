@@ -1,5 +1,3 @@
-const ETICHETE_PRIORITATE = { mica: "mică", medie: "medie", mare: "mare" };
-
 export default function MaintenanceCard({ mentenanta, onToggle, onDelete }) {
   return (
     <li className={mentenanta.efectuata ? "task-card done" : "task-card"}>
@@ -11,9 +9,10 @@ export default function MaintenanceCard({ mentenanta, onToggle, onDelete }) {
         />
         <div>
           <h3>{mentenanta.titlu}</h3>
-          <span className={`badge badge-${mentenanta.prioritate}`}>
-            Prioritate {ETICHETE_PRIORITATE[mentenanta.prioritate]}
-          </span>
+          {mentenanta.descriere && <p className="info">{mentenanta.descriere}</p>}
+          {mentenanta.categorie && (
+            <span className="badge badge-category">{mentenanta.categorie}</span>
+          )}
         </div>
       </label>
       <button

@@ -1,21 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchMaintenanceTasks } from "./api";
 import MaintenanceList from "./components/MaintenanceList.jsx";
 import "./App.css";
-
-// Adaptează array-ul cu datele tale din Etapa 4
-const MENTENANTE_INITIALE = [
-  { id: 1, titlu: "Schimb ulei și filtre", efectuata: false, prioritate: "mare" },
-  { id: 2, titlu: "Verificare plăcuțe frână", efectuata: true, prioritate: "medie" },
-  { id: 3, titlu: "Înlocuire lichid de parbriz", efectuata: false, prioritate: "mica" }
-];
 
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export default function App() {
-  const [mentenante, setMentenante] = useState(MENTENANTE_INITIALE);
+  const [mentenante, setMentenante] = useState([]);
   const [tema, setTema] = useState(temaInitiala);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadMaintenanceTasks() {
+      try {
+        const data = await fetchMaintenanceTasks();
+
+        if (!ignore) {
+          setMentenante(data.map((task) => ({
+            id: task.id,
+            titlu: task.title,
+            descriere: task.description,
+            categorie: task.category,
+            efectuata: task.completed
+          })));
+        }
+      } catch (err) {
+        if (!ignore) {
+          setError(err instanceof Error ? err.message : "Nu s-au putut încărca intervențiile.");
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadMaintenanceTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   function handleToggle(id) {
     setMentenante((prev) =>
@@ -54,11 +84,19 @@ export default function App() {
       <main className="container">
         <section className="panel">
           <h2>Intervențiile mele</h2>
-          <MaintenanceList
-            mentenante={mentenante}
-            onToggle={handleToggle}
-            onDelete={handleDelete}
-          />
+          {loading && <p className="info" role="status">Se încarcă intervențiile...</p>}
+          {error && (
+            <p className="error" role="alert">
+              Nu s-au putut încărca intervențiile: {error}. Verifică dacă API-ul rulează cu <code>npm run api</code>.
+            </p>
+          )}
+          {!loading && !error && (
+            <MaintenanceList
+              mentenante={mentenante}
+              onToggle={handleToggle}
+              onDelete={handleDelete}
+            />
+          )}
         </section>
       </main>
     </>

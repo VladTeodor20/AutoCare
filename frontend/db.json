@@ -1,0 +1,39 @@
+{
+  "maintenanceTasks": [
+    {
+      "id": 1,
+      "title": "Schimb ulei motor",
+      "description": "Înlocuirea uleiului și a filtrului de ulei",
+      "category": "Motor",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Verificare frâne",
+      "description": "Verificarea plăcuțelor și discurilor de frână",
+      "category": "Frâne",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Verificare anvelope",
+      "description": "Verificarea presiunii și a uzurii anvelopelor",
+      "category": "Anvelope",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "title": "Schimb filtru aer",
+      "description": "Înlocuirea filtrului de aer al motorului",
+      "category": "Filtre",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "title": "Verificare baterie",
+      "description": "Verificarea stării bateriei și a încărcării",
+      "category": "Electric",
+      "completed": true
+    }
+  ]
+}
