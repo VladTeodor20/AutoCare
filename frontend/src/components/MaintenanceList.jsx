@@ -2,7 +2,11 @@ import MaintenanceCard from "./MaintenanceCard.jsx";
 
 export default function MaintenanceList({ mentenante, onToggle, onDelete }) {
   if (mentenante.length === 0) {
-    return <p className="empty">Nu există nicio intervenție înregistrată.</p>;
+    return (
+      <p className="empty" data-testid="empty">
+        Nu există nicio intervenție înregistrată.
+      </p>
+    );
   }
 
   return (

@@ -1,17 +1,35 @@
 import { useEffect, useState } from "react";
-import { fetchMaintenanceTasks } from "./api";
+import {
+  createMaintenanceTask,
+  deleteMaintenanceTask,
+  fetchMaintenanceTasks,
+  updateMaintenanceTask,
+} from "./api.js";
 import MaintenanceList from "./components/MaintenanceList.jsx";
+import TaskForm from "./components/TaskForm.jsx";
 import "./App.css";
 
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function adapteazaMentenanta(task) {
+  return {
+    id: task.id,
+    titlu: task.title,
+    descriere: task.description,
+    categorie: task.category,
+    efectuata: task.completed,
+  };
+}
+
 export default function App() {
   const [mentenante, setMentenante] = useState([]);
   const [tema, setTema] = useState(temaInitiala);
   const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     let ignore = false;
@@ -21,17 +39,14 @@ export default function App() {
         const data = await fetchMaintenanceTasks();
 
         if (!ignore) {
-          setMentenante(data.map((task) => ({
-            id: task.id,
-            titlu: task.title,
-            descriere: task.description,
-            categorie: task.category,
-            efectuata: task.completed
-          })));
+          setMentenante(data.map(adapteazaMentenanta));
+          setLoaded(true);
+          setLoadError(false);
         }
       } catch (err) {
         if (!ignore) {
           setError(err instanceof Error ? err.message : "Nu s-au putut încărca intervențiile.");
+          setLoadError(true);
         }
       } finally {
         if (!ignore) {
@@ -47,14 +62,41 @@ export default function App() {
     };
   }, []);
 
-  function handleToggle(id) {
-    setMentenante((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, efectuata: !m.efectuata } : m))
-    );
+  async function handleAdd(task) {
+    const savedTask = await createMaintenanceTask(task);
+    setMentenante((prev) => [...prev, adapteazaMentenanta(savedTask)]);
+    setLoaded(true);
+    setLoadError(false);
+    setError("");
   }
 
-  function handleDelete(id) {
-    setMentenante((prev) => prev.filter((m) => m.id !== id));
+  async function handleToggle(id) {
+    const task = mentenante.find((item) => item.id === id);
+    if (!task) return;
+
+    try {
+      const savedTask = await updateMaintenanceTask(id, {
+        completed: !task.efectuata,
+      });
+      setMentenante((prev) =>
+        prev.map((item) => (item.id === id ? adapteazaMentenanta(savedTask) : item))
+      );
+      setLoadError(false);
+      setError("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Intervenția nu a putut fi actualizată.");
+    }
+  }
+
+  async function handleDelete(id) {
+    try {
+      await deleteMaintenanceTask(id);
+      setMentenante((prev) => prev.filter((item) => item.id !== id));
+      setLoadError(false);
+      setError("");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Intervenția nu a putut fi ștearsă.");
+    }
   }
 
   function handleTema() {
@@ -83,14 +125,23 @@ export default function App() {
       </header>
       <main className="container">
         <section className="panel">
+          <h2>Adaugă o intervenție</h2>
+          <TaskForm onAdd={handleAdd} />
+        </section>
+        <section className="panel">
           <h2>Intervențiile mele</h2>
-          {loading && <p className="info" role="status">Se încarcă intervențiile...</p>}
-          {error && (
-            <p className="error" role="alert">
-              Nu s-au putut încărca intervențiile: {error}. Verifică dacă API-ul rulează cu <code>npm run api</code>.
+          {loading && (
+            <p className="info" role="status" data-testid="loading">
+              Se încarcă intervențiile...
             </p>
           )}
-          {!loading && !error && (
+          {error && (
+            <p className="error" role="alert" data-testid="error">
+              {loadError ? "Nu s-au putut încărca intervențiile" : "Nu s-a putut actualiza lista"}: {error}.
+              Verifică dacă API-ul rulează cu <code>npm run api</code>.
+            </p>
+          )}
+          {loaded && (
             <MaintenanceList
               mentenante={mentenante}
               onToggle={handleToggle}

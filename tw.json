@@ -1,0 +1,9 @@
+{
+  "resource": "maintenanceTasks",
+  "title": "title",
+  "done": "completed",
+  "sample": {
+    "description": "Intervenție de test",
+    "category": "Filtre"
+  }
+}

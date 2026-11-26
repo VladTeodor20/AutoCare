@@ -432,15 +432,15 @@ button, input, select {
 }
 
 .btn-danger {
-  border: 1px solid var(--mare);
+  border: 1px solid var(--urgent-text);
   background: transparent;
-  color: var(--mare);
+  color: var(--urgent-text);
   border-radius: 8px;
   padding: 6px 12px;
   font: inherit;
   cursor: pointer;
 }
-.btn-danger:hover { background: var(--mare); color: #fff; }
+.btn-danger:hover { background: var(--urgent-text); color: var(--card); }
 
 
 .app-header { position: relative; }
@@ -498,4 +498,13 @@ button, input, select {
 .badge-category {
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+.item-form input[aria-invalid="true"] {
+    border-color: var(--urgent-text);
+}
+
+.item-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
