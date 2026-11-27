@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #17253c;
+  --muted: #718096;
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  --accent-soft: #eaf1ff;
+  --border: #e1e8f2;
+  --urgent-bg: #fff0e8;
+  --urgent-text: #c05621;
+  --done-bg: #e8f6ee;
+  --done-text: #23774d;
+  --shadow: 0 12px 35px rgba(32, 55, 90, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #14121d;
+    --card: #1e1b2e;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #8ab4ff;
+    --accent-dark: #6c9ff3;
+    --accent-soft: #2a2342;
+    --border: #352f4d;
+    --urgent-bg: #452d29;
+    --urgent-text: #ffb49d;
+    --done-bg: #1e342c;
+    --done-text: #a3e4c1;
+    --shadow: none;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #14121d;
+  --card: #1e1b2e;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #8ab4ff;
+  --accent-dark: #6c9ff3;
+  --accent-soft: #2a2342;
+  --border: #352f4d;
+  --urgent-bg: #452d29;
+  --urgent-text: #ffb49d;
+  --done-bg: #1e342c;
+  --done-text: #a3e4c1;
+  --shadow: none;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.panel {
+  min-width: 0;
+  padding: 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow-wrap: anywhere;
+}
+
+.info {
+  color: var(--muted);
+}
+
+.error {
+  padding: 10px 12px;
+  border: 1px solid var(--urgent-text);
+  border-radius: 8px;
+  background: var(--urgent-bg);
+  color: var(--urgent-text);
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.btn-danger {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--urgent-text);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--urgent-text);
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: var(--urgent-text);
+  color: var(--card);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .panel {
+    padding: 21px;
+  }
+}

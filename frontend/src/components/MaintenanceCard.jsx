@@ -1,25 +1,36 @@
+import { Link } from "react-router-dom";
+import styles from "./MaintenanceCard.module.css";
+
 export default function MaintenanceCard({ mentenanta, onToggle, onDelete }) {
   return (
     <li
-      className={mentenanta.efectuata ? "task-card done" : "task-card"}
+      className={`${styles.card} ${mentenanta.efectuata ? styles.done : ""}`}
       data-testid="item"
       data-id={mentenanta.id}
     >
-      <label className="task-main">
+      <div className={styles.main}>
         <input
+          className={styles.checkbox}
           type="checkbox"
           checked={mentenanta.efectuata}
           onChange={() => onToggle(mentenanta.id)}
+          aria-label={`Marchează ${mentenanta.titlu} ca efectuată`}
           data-testid="item-toggle"
         />
         <div>
-          <h3 data-testid="item-title">{mentenanta.titlu}</h3>
-          {mentenanta.descriere && <p className="info">{mentenanta.descriere}</p>}
+          <Link
+            className={styles.title}
+            to={`/maintenanceTasks/${mentenanta.id}`}
+            data-testid="item-link"
+          >
+            {mentenanta.titlu}
+          </Link>
+          {mentenanta.descriere && <p className={styles.description}>{mentenanta.descriere}</p>}
           {mentenanta.categorie && (
-            <span className="badge badge-category">{mentenanta.categorie}</span>
+            <span className="badge">{mentenanta.categorie}</span>
           )}
         </div>
-      </label>
+      </div>
       <button
         className="btn-danger"
         onClick={() => onDelete(mentenanta.id)}

@@ -1,0 +1,61 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.done {
+  background: var(--done-bg);
+}
+
+.main {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.title {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.done .title {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.description {
+  margin: 3px 0 9px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .card {
+    padding: 13px;
+    gap: 10px;
+  }
+}

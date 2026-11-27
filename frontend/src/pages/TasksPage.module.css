@@ -1,0 +1,19 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.6fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.summary {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}

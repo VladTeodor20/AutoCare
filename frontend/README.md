@@ -1,18 +1,20 @@
 # AutoCare — jurnal de mentenanță auto
 
 Aplicație React pentru afișarea și urmărirea intervențiilor de mentenanță auto.
-Interfața principală este în `frontend/`, iar prototipul static din etapele
-anterioare este păstrat în `mockup/`.
+Interfața este în acest director, iar prototipul static din etapele anterioare
+este păstrat în `../mockup/`.
 
 ## Conținutul proiectului
 
-- `src/App.jsx` încarcă intervențiile, calculează contorul și gestionează
-  tema, bifarea și ștergerea locală.
+- `src/App.jsx` definește rutele, iar paginile din `src/pages/` gestionează
+  lista, detaliile, prezentarea și adresele inexistente.
 - `src/components/` conține componentele reutilizabile pentru lista de
-  intervenții și cardul fiecărei intervenții.
-- `src/api.js` centralizează cererea HTTP și adresa API-ului.
+  intervenții, formular și layout-ul comun; stilurile lor sunt în CSS Modules.
+- `src/api.js` centralizează cererile HTTP, inclusiv încărcarea unui singur
+  element la `/maintenanceTasks/:id`.
+- `src/index.css` păstrează variabilele și clasele comune.
 - `db.json` conține cinci intervenții de test, cu categorii și stări diferite.
-- `src/App.css` definește aspectul adaptabil și temele vizuale.
+- `tw.json` păstrează configurația folosită de verificarea automată.
 
 ## Rulare locală
 
@@ -41,7 +43,7 @@ valoarea implicită este `http://localhost:3001`.
 - [x] Etapa 5: stare locală și evenimente
 - [x] Etapa 6: încărcarea datelor dintr-un API mock
 - [x] Etapa 7: formular, validare și operații persistente
-- [ ] Etapa 8: rutare și pagină de detaliu
+- [x] Etapa 8: rutare, pagină de detaliu și stiluri modulare
 
 ## Etapa 6: date de la un API mock
 
@@ -95,6 +97,29 @@ temporar API-ul cu întârziere:
 ```sh
 npx json-server --watch db.json --port 3001 --delay 3000
 ```
+
+## Etapa 8: rutare și pagină de detaliu
+
+React Router oferă navigare fără reîncărcarea paginii, cu layout comun,
+marcarea rutei active, pagina Despre și pagina 404. Lista rămâne la `/`, iar
+detaliile sunt încărcate individual din API la `/maintenanceTasks/:id`.
+Componenta de detaliu afișează starea, categoria, descrierea și ID-ul; un ID
+inexistent afișează eroarea API cu link înapoi la listă.
+
+Stilurile componentelor și paginilor sunt izolate în fișiere
+`.module.css`; `src/index.css` conține numai tema, stilurile de bază și clasele
+comune. Atributele `data-testid` din Etapa 7 sunt păstrate, iar titlul fiecărui
+card folosește `data-testid="item-link"` pentru navigarea la detalii.
+
+| ID | Cerință | Verificare |
+|---|---|---|
+| S8-R1 | Navigarea din antet schimbă pagina fără reîncărcare | Navighează între Intervenții și Despre; verifică fila Network |
+| S8-R2 | Titlul cardului deschide detaliul elementului | Deschide un card și verifică `/maintenanceTasks/<id>` |
+| S8-R3 | Detaliul se poate reîncărca, iar un ID necunoscut afișează eroare | Reîncarcă `/maintenanceTasks/1`, apoi deschide `/maintenanceTasks/999` |
+| S8-R4 | O adresă necunoscută afișează pagina 404 a aplicației | Deschide `/ceva` și caută `data-testid="not-found"` |
+| S8-R5 | Stilurile specifice sunt CSS Modules; cele comune sunt în `index.css` | Verifică `src/components/` și `src/pages/` |
+| S8-R6 | Selectoarele din Etapele 7–8 și ruta bazată pe `tw.json` sunt păstrate | Verifică `data-testid` în pagină și resursa `maintenanceTasks` |
+| S8-R7 | README și jurnalul AI documentează etapa | Consultă această secțiune și `../ai-log/etapa-08.md` |
 
 Verificări de proiect:
 

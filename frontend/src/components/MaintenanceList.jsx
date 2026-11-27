@@ -1,4 +1,5 @@
 import MaintenanceCard from "./MaintenanceCard.jsx";
+import styles from "./MaintenanceList.module.css";
 
 export default function MaintenanceList({ mentenante, onToggle, onDelete }) {
   if (mentenante.length === 0) {
@@ -10,7 +11,7 @@ export default function MaintenanceList({ mentenante, onToggle, onDelete }) {
   }
 
   return (
-    <ul className="task-list">
+    <ul className={styles.list}>
       {mentenante.map((mentenanta) => (
         <MaintenanceCard
           key={mentenanta.id}

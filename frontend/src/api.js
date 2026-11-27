@@ -18,6 +18,10 @@ export function fetchMaintenanceTasks() {
   return request("/maintenanceTasks");
 }
 
+export function fetchMaintenanceTask(id) {
+  return request(`/maintenanceTasks/${id}`);
+}
+
 export function createMaintenanceTask(task) {
   return request("/maintenanceTasks", {
     method: "POST",

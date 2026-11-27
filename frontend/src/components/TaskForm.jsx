@@ -1,6 +1,6 @@
 import { useState } from "react";
-
-const CATEGORII = ["Motor", "Frâne", "Anvelope", "Filtre", "Electric"];
+import { CATEGORII } from "../constants.js";
+import styles from "./TaskForm.module.css";
 const TITLU_MAX = 100;
 
 export default function TaskForm({ onAdd }) {
@@ -47,9 +47,10 @@ export default function TaskForm({ onAdd }) {
   }
 
   return (
-    <form className="item-form" onSubmit={handleSubmit} noValidate data-testid="form">
-      <label htmlFor="form-title">Titlu</label>
+    <form className={styles.form} onSubmit={handleSubmit} noValidate data-testid="form">
+      <label className={styles.label} htmlFor="form-title">Titlu</label>
       <input
+        className={styles.input}
         id="form-title"
         type="text"
         value={titlu}
@@ -62,8 +63,9 @@ export default function TaskForm({ onAdd }) {
         data-testid="form-title"
       />
 
-      <label htmlFor="form-description">Descriere</label>
+      <label className={styles.label} htmlFor="form-description">Descriere</label>
       <input
+        className={styles.input}
         id="form-description"
         type="text"
         value={descriere}
@@ -73,8 +75,9 @@ export default function TaskForm({ onAdd }) {
         data-testid="form-description"
       />
 
-      <label htmlFor="form-category">Categorie</label>
+      <label className={styles.label} htmlFor="form-category">Categorie</label>
       <select
+        className={styles.input}
         id="form-category"
         value={categorie}
         onChange={(event) => setCategorie(event.target.value)}
@@ -93,7 +96,7 @@ export default function TaskForm({ onAdd }) {
           {eroare}
         </p>
       )}
-      <button type="submit" disabled={trimite} data-testid="form-submit">
+      <button className={styles.submitButton} type="submit" disabled={trimite} data-testid="form-submit">
         {trimite ? "Se salvează..." : "Adaugă intervenția"}
       </button>
     </form>
